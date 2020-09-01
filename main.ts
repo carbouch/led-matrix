@@ -1,25 +1,13 @@
 input.onButtonPressed(Button.A, function () {
-    if (input.buttonIsPressed(Button.A)) {
-        pins.digitalWritePin(DigitalPin.P0, 0)
-        pins.digitalWritePin(DigitalPin.P2, 0)
-    }
     for (let index = 0; index < 4; index++) {
         max7219_matrix.randomizeAll()
         max7219_matrix.scrollText(
-        "AHMED MEHOUACHI ;)  ",
+        "rotations activé ",
         75,
         500
         )
-        max7219_matrix.displayText(
-        "1234567",
-        0,
-        false
-        )
         basic.pause(5000)
     }
-})
-input.onButtonPressed(Button.B, function () {
-	
 })
 let BLUE = 0
 let GREEN = 0
@@ -63,6 +51,23 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
+	
+})
+basic.forever(function () {
+    while (input.buttonIsPressed(Button.A)) {
+        pins.servoWritePin(AnalogPin.P0, 180)
+        pins.digitalWritePin(DigitalPin.P1, 0)
+        pins.digitalWritePin(DigitalPin.P2, 0)
+        basic.pause(1000)
+        pins.servoWritePin(AnalogPin.P0, 0)
+        pins.digitalWritePin(DigitalPin.P2, 1)
+        pins.digitalWritePin(DigitalPin.P1, 1)
+        basic.pause(1000)
+        pins.servoWritePin(AnalogPin.P0, 180)
+        basic.pause(1000)
+    }
+})
+basic.forever(function () {
     RED = 0
     GREEN = 0
     BLUE = 255
@@ -84,9 +89,4 @@ basic.forever(function () {
         item.showColor(neopixel.rgb(RED, GREEN, BLUE))
         basic.pause(1)
     }
-})
-basic.forever(function () {
-    pins.servoWritePin(AnalogPin.P0, 180)
-    pins.servoWritePin(AnalogPin.P0, 0)
-    pins.servoWritePin(AnalogPin.P0, 180)
 })
